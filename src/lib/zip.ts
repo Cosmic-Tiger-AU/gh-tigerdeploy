@@ -19,7 +19,14 @@ export const zipDistFolder = async () => {
       : `-r ${zipPath} ${distPath}`;
 
   try {
-    await exec(`${zipCommand} ${zipArgs}`);
+    await new Promise((resolve, reject) => {
+      exec(`${zipCommand} ${zipArgs}`, (err) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(true);
+      });
+    });
     process.env.DEBUG && console.log(`Zipped dist folder to ${zipPath}`);
     return Promise.resolve();
   } catch (err) {
