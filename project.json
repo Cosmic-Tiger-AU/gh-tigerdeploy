@@ -4,15 +4,22 @@
   "sourceRoot": "src",
   "projectType": "library",
   "targets": {
-    "build": {
+    "compile": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/tigerdeploy",
+        "outputPath": "compiled",
         "main": "./src/index.ts",
         "tsConfig": "./tsconfig.lib.json",
         "assets": ["*.md"]
       }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["ncc build compiled/src/index.js"]
+      },
+      "dependsOn": ["compile"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
