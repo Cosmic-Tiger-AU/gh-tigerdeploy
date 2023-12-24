@@ -17,7 +17,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["ncc build compiled/src/index.js"]
+        "commands": ["ncc build -m compiled/src/index.js"]
       },
       "dependsOn": ["compile"]
     },
