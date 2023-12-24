@@ -3,6 +3,7 @@
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "src",
   "projectType": "library",
+  "cache": false,
   "targets": {
     "compile": {
       "executor": "@nx/js:tsc",
@@ -16,6 +17,7 @@
     },
     "build": {
       "executor": "nx:run-commands",
+      "cache": false,
       "options": {
         "commands": ["ncc build -m compiled/src/index.js"]
       },

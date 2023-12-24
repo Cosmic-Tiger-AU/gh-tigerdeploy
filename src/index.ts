@@ -29,7 +29,7 @@ const perform = async () => {
 
     // lambda invoke
     const lambda = await invokeLambda(
-      'agent_deployer',
+      getInput('lambda_function_name'),
       JSON.stringify({
         artifact: zipPath,
       })

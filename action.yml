@@ -27,6 +27,9 @@ inputs:
     description: 'Dist Path to build artifacts to upload to S3'
     required: false
     default: 'dist'
+  lambda_function_name:
+    description: 'Lambda Function Name'
+    required: true
 runs:
   main: 'dist/index.js'
   using: 'node20'
