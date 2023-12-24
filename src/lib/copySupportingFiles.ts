@@ -10,7 +10,8 @@ const copyDir = (src: string, dest: string) => {
     const destFile = `${dest}/${file}`;
     const fileStats = fs.statSync(srcFile);
     if (fileStats.isFile()) {
-      fs.copyFileSync(srcFile, destFile, fs.constants.COPYFILE_FICLONE_FORCE); // Use COPYFILE_FICLONE_FORCE flag to overwrite existing files
+      if (!fs.existsSync(destFile)) fs.rmSync(destFile);
+      fs.copyFileSync(srcFile, destFile);
     } else if (fileStats.isDirectory()) {
       fs.mkdirSync(destFile);
       copyDir(srcFile, destFile);
