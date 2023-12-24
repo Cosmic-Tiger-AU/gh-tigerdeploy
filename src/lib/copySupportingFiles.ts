@@ -1,27 +1,9 @@
 import { getInput } from '@actions/core';
-import * as fs from 'node:fs';
-
-const copyDir = (src: string, dest: string) => {
-  const listDirectory = fs.readdirSync(src);
-  if (!fs.existsSync(dest)) fs.mkdirSync(dest);
-
-  listDirectory.forEach((file) => {
-    const srcFile = `${src}/${file}`;
-    const destFile = `${dest}/${file}`;
-    const fileStats = fs.statSync(srcFile);
-    if (fileStats.isFile()) {
-      if (!fs.existsSync(destFile)) fs.rmSync(destFile);
-      fs.copyFileSync(srcFile, destFile);
-    } else if (fileStats.isDirectory()) {
-      fs.mkdirSync(destFile);
-      copyDir(srcFile, destFile);
-    }
-  });
-};
+import { copy } from 'fs-extra';
 
 const copyFile = async (src: string, dest: string) => {
   try {
-    await fs.promises.copyFile(src, dest);
+    await copy(src, dest);
     process.env.DEBUG && console.log(`Copied ${src} to ${dest}`);
     return Promise.resolve();
   } catch (err) {
@@ -34,7 +16,7 @@ export const copyScriptFolderIfExists = async () => {
   const distPath = getInput('dist_path');
 
   try {
-    copyDir(path, distPath);
+    await copy(path, `${distPath}/scripts`);
 
     process.env.DEBUG &&
       console.log(`Copied scripts folder to ${distPath}/scripts`);
