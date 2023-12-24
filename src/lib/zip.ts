@@ -3,7 +3,11 @@ import { exec } from 'node:child_process';
 
 export const zipDistFolder = async () => {
   // zip using native commands
-  const distPath = getInput('dist_path');
+  let distPath = getInput('dist_path');
+  // Remove trailing slash
+  if (distPath.charAt(distPath.length - 1) === '/') {
+    distPath = distPath.slice(0, -1);
+  }
   const zipPath = 'dist.zip';
 
   // Handle zip on linux, windows, mac

@@ -74135,7 +74135,7 @@ const copyDir = (src, dest) => {
     });
 };
 const copyScriptFolderIfExists = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
-    const path = (0, core_1.getInput)('codedeploy_scripts_path');
+    const path = (0, core_1.getInput)('scripts_path');
     const distPath = (0, core_1.getInput)('dist_path');
     try {
         copyDir(path, distPath);
@@ -74202,7 +74202,7 @@ const tslib_1 = __nccwpck_require__(83134);
 const client_s3_1 = __nccwpck_require__(6257);
 const core_1 = __nccwpck_require__(19093);
 const getClient = () => {
-    const region = (0, core_1.getInput)('s3_bucket_region');
+    const region = (0, core_1.getInput)('aws_region');
     const accessKeyId = (0, core_1.getInput)('aws_access_key_id');
     const secretAccessKey = (0, core_1.getInput)('aws_secret_access_key');
     return new client_s3_1.S3Client({

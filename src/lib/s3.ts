@@ -3,7 +3,7 @@ import { getInput } from '@actions/core';
 import type { Readable } from 'node:stream';
 
 const getClient = () => {
-  const region = getInput('s3_bucket_region');
+  const region = getInput('aws_region');
   const accessKeyId = getInput('aws_access_key_id');
   const secretAccessKey = getInput('aws_secret_access_key');
   return new S3Client({

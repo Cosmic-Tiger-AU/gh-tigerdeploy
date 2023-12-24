@@ -1,5 +1,5 @@
 name: 'TigerDeploy'
-description: 'Deploy to AWS CodeDeploy via S3 and friends'
+description: 'Deploy to AWS CodeDeploy via S3 and Lambda Invoke'
 inputs:
   aws_access_key_id:
     description: 'AWS Access Key'
@@ -7,29 +7,20 @@ inputs:
   aws_secret_access_key:
     description: 'AWS Access Secret'
     required: true
+  aws_region:
+    description: 'S3 Bucket Region'
+    required: true
   s3_bucket_name:
     description: 'S3 Bucket Name'
-    required: true
-  s3_bucket_region:
-    description: 'S3 Bucket Region'
     required: true
   s3_bucket_prefix:
     description: 'S3 Bucket Prefix'
     required: true
-  codedeploy_region:
-    description: 'CodeDeploy Region'
-    required: true
-  codedeploy_application_name:
-    description: 'CodeDeploy Application Name'
-    required: true
-  codedeploy_group:
-    description: 'CodeDeploy Group'
-    required: true
-  codedeploy_appspec_path:
+  appspec_path:
     description: 'CodeDeploy AppSpec Path'
     required: false
     default: 'appspec.yml'
-  codedeploy_scripts:
+  scripts_path:
     description: 'CodeDeploy Scripts Folder'
     required: false
   dist_path:
